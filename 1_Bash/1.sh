@@ -15,7 +15,7 @@ while read line; do
       fi
     else
       dial=$((dial + distance))
-      if [ "$dial" -ge 100 ]; then
+      if [ "$dial" -gt 99 ]; then
         dial=$((dial - 100))
       fi
     fi
@@ -23,7 +23,7 @@ while read line; do
     if [ "$dial" -eq 0 ]; then
       answer=$((answer + 1))
     fi
-done < input_1.txt
+done < input.txt
 
 echo "$answer"
 #1021
