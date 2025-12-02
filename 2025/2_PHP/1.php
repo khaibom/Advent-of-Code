@@ -11,7 +11,7 @@ function get_ranges($input) {
     return $ranges;
 }
 
-function is_invalid($id) {
+function is_invalid_p1($id) {
     $id = (string)$id;
     if(strlen($id)%2 == 1){
         return false;
@@ -25,10 +25,10 @@ function is_invalid($id) {
 }
 
 
-function get_sum_invalid_ids($start, $end) {
+function get_sum_invalid_ids_p1($start, $end) {
     $sum = 0;
     for($id = $start; $id <= $end; $id++){
-        if(is_invalid($id)){
+        if(is_invalid_p1($id)){
             $sum += $id;
         }
     }
@@ -39,7 +39,8 @@ function get_sum_invalid_ids($start, $end) {
 $ranges = get_ranges($input);
 $answer = 0;
 foreach($ranges as $range){
-    $answer += get_sum_invalid_ids($range[0], $range[1]);
+    $answer += get_sum_invalid_ids_p1($range[0], $range[1]);
 }
-print($answer);
+print("p1: " . $answer);
+print("\n");
 //9188031749
