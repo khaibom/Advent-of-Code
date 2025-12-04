@@ -23,6 +23,10 @@ public class Input {
         }
     }
 
+    public void remove_paper_roll(int i, int j){
+        this.matrix[i][j] = 'x';
+    }
+
     public Input(String input_path) throws IOException {
         getInput(input_path);
     }

@@ -25,10 +25,30 @@ public class Day4 {
         System.out.println("Part 1: " + count); //1356
     }
 
+    public static void part2(Input input) {
+        int sum = 0;
+        while(true) {
+            int count = 0;
+            for (int i = 0; i < input.matrix[0].length; i++) {
+                for (int j = 0; j < input.matrix[1].length; j++) {
+                    if(check_paper_roll_p1(input.matrix, i, j)){
+                        count++;
+                        input.remove_paper_roll(i, j);
+                    }
+                }
+            }
+            if(count == 0) break;
+            sum += count;
+        }
+        System.out.println("Part 2: " + sum); //8713
+    }
+
 
     public static void main(String[] args) throws IOException {
         Input input = new Input("src/input.txt");
         part1(input.matrix);
+        part2(input);
+
     }
 
 }
