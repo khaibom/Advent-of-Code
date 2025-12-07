@@ -78,10 +78,48 @@ func p1(lines [][]rune) {
 	}
 	fmt.Println(count)
 }
+
+func p2(lines [][]rune) {
+	timelines := make(map[int]int)
+	for i, line := range lines {
+		if i == 0 {
+			s_pos := findPosInLine(line, 'S')
+			timelines[s_pos[0]] = 1
+			continue
+		}
+		new_potential_split_positions := findPosInLine(line, '^')
+		if len(new_potential_split_positions) == 0 {
+			continue
+		}
+		splitter_set := make(map[int]struct{}, len(new_potential_split_positions))
+		for _, new_potential_split_position := range new_potential_split_positions {
+			splitter_set[new_potential_split_position] = struct{}{}
+		}
+
+		next := make(map[int]int)
+		for col, count := range timelines {
+			if _, is_splitter := splitter_set[col]; is_splitter {
+				next[col-1] += count
+				next[col+1] += count
+			} else {
+				next[col] += count
+			}
+			timelines = next
+		}
+	}
+
+	result := 0
+	for _, count := range timelines {
+		result += count
+	}
+	fmt.Println(result)
+}
+
 func main() {
 	input, err := getInput("input.txt")
 	if err != nil {
 		panic(err)
 	}
 	p1(input) //1658
+	p2(input) //53916299384254
 }
